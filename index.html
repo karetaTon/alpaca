@@ -3,29 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <title>Hackeando WhatsApp...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       background: #101010;
       color: #00ff00;
       font-family: 'Courier New', Courier, monospace;
       margin: 0;
-      padding: 40px 0 0 40px;
-      font-size: 1.15em;
+      padding: 24px 0 0 0;
+      font-size: 1.10em;
+      box-sizing: border-box;
+      min-height: 100vh;
     }
     #hack-console {
       white-space: pre-line;
-      min-height: 400px;
-      max-width: 700px;
-      margin-bottom: 36px;
+      min-height: 220px;
+      max-width: 95vw;
+      margin: 0 auto 24px auto;
+      padding: 0 10px;
+      font-size: 1em;
+      word-break: break-all;
     }
     #ascii-logo {
       color: #ff2222;
       font-family: 'Courier New', Courier, monospace;
-      font-size: 1.6em;
-      text-align: left;
-      margin-left: 0;
-      line-height: 1.05em;
+      font-size: 2em;
+      text-align: center;
+      margin: 0 auto 24px auto;
+      line-height: 1;
       user-select: none;
+      max-width: 100vw;
+      overflow: auto;
+      letter-spacing: 1px;
     }
     .blinking {
       animation: blinking 1s infinite;
@@ -35,19 +44,35 @@
       50% { opacity: 0.3; }
       100% { opacity: 1; }
     }
+    @media (max-width: 600px) {
+      #ascii-logo {
+        font-size: 1.2em;
+      }
+      #hack-console {
+        font-size: 0.90em;
+        padding: 0 2vw;
+      }
+    }
   </style>
 </head>
 <body>
   <div id="hack-console"></div>
   <pre id="ascii-logo">
-       _____
-     /      \
-    |  () () |
-     \  /\  /
-      |____|
-     /      \
-    |        |
-     \______/ 
+      .-""""-.
+     / -   -  \
+    |  .-. .- |
+    |  \o| |o (
+    \     ^    \
+     '.  )--'  /
+       '-...-'`
+      /  . .  \
+     |  | | |  |
+      \_|_|_|_/
+       /_ _ _\
+     //  |  | \\
+    (|  |  |  |)
+     \  |  |  /
+      '-|__|-'
   </pre>
   <script>
     const lines = [
@@ -73,8 +98,8 @@
       "Reportando actividad sospechosa a la policía...",
       "Desbloqueando tu WhatsApp para uso externo...",
       "¿Creías que estabas a salvo?",
-      "La privacidad ya no existe.",
-      ];
+      "La privacidad ya no existe."
+    ];
 
     const consoleDiv = document.getElementById('hack-console');
     let i = 0;
@@ -85,6 +110,9 @@
         i++;
         setTimeout(printLine, Math.random() * 800 + 400);
       } else {
+        // Cuando termina los mensajes, inicia la lluvia de caracteres tras 7 segundos
+        setTimeout(startRandomChars, 7000);
+        // Agrega el cursor parpadeante mientras tanto
         consoleDiv.innerHTML += "\n";
         const cursor = document.createElement('span');
         cursor.className = 'blinking';
@@ -93,7 +121,31 @@
       }
     }
 
+    function generateRandomLine(length) {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}|;:,.<>?/';
+      let line = '';
+      for (let j = 0; j < length; j++) {
+        line += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return line;
+    }
+
+    let spamInterval;
+    function startRandomChars() {
+      // Elimina el cursor parpadeante
+      const cursor = document.querySelector('.blinking');
+      if (cursor) cursor.remove();
+
+      spamInterval = setInterval(() => {
+        // Genera de 1 a 3 líneas por ciclo para que sea bien rápido
+        for (let k = 0; k < Math.floor(Math.random() * 3) + 1; k++) {
+          consoleDiv.innerHTML += generateRandomLine(Math.floor(Math.random() * 60) + 30) + "\n";
+        }
+        // Mantén el scroll abajo en móviles y PC
+        consoleDiv.scrollTop = consoleDiv.scrollHeight;
+      }, 50);
+    }
+
     printLine();
   </script>
 </body>
-</html>
