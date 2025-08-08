@@ -8,19 +8,44 @@
       background: #101010;
       color: #00ff00;
       font-family: 'Courier New', Courier, monospace;
-      font-size: 1.2em;
-      padding: 20px;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+    }
+    #terminal-container {
+      display: flex;
+      flex-direction: row;
+      height: 100vh;
+      align-items: flex-start;
+      justify-content: space-between;
     }
     #hack-console {
       background: #181818;
       border-radius: 5px;
-      padding: 20px;
-      min-height: 300px;
-      box-shadow: 0 0 10px #0f0;
+      padding: 30px 20px;
+      margin: 40px 0 0 40px;
+      min-width: 50vw;
       max-width: 700px;
-      margin: 60px auto;
+      min-height: 400px;
+      box-shadow: 0 0 12px #c00;
+      font-size: 1.15em;
       white-space: pre-line;
       overflow: hidden;
+    }
+    #ascii-logo {
+      color: #ff2222;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 1em;
+      background: #181818;
+      border-radius: 8px;
+      padding: 36px 18px;
+      margin: 40px 40px 0 0;
+      box-shadow: 0 0 14px #900;
+      height: auto;
+      min-width: 340px;
+      max-width: 340px;
+      text-align: right;
+      user-select: none;
     }
     .blinking {
       animation: blinking 1s infinite;
@@ -33,23 +58,44 @@
   </style>
 </head>
 <body>
-  <div id="hack-console"></div>
+  <div id="terminal-container">
+    <div id="hack-console"></div>
+    <pre id="ascii-logo">
+      __      __      _                                 
+     /  \    /  \   | |                                
+    |    |  |    |  | |   __      __  ___   _   _  ___ 
+    |    |  |    |  | |   \ \ /\ / / / _ \ | | | |/ _ \
+    |    |  |    |  | |    \ V  V / |  __/ | |_| |  __/
+     \__/    \__/   |_|     \_/\_/   \___|  \__, |\___|
+                                             __/ |    
+                                            |___/     
+    </pre>
+  </div>
   <script>
     const lines = [
-      "Iniciando hackeo de WhatsApp...",
-      "Estableciendo conexión segura...",
-      "Rastreando IP: 192.168.1.101",
-      "Localizando dispositivo...",
-      "Accediendo a base de datos de WhatsApp...",
-      "Descifrando mensajes...",
-      "Obteniendo contraseñas...",
-      "Analizando conversaciones recientes...",
-      "Descargando archivos multimedia...",
-      "¡Acceso concedido!",
-      "Enviando mensajes automatizados...",
-      "Eliminando historial de conversación...",
-      "Borrando pruebas...",
-      "Proceso completado.",
+      "Iniciando acceso forzado a WhatsApp...",
+      "Obteniendo permisos de administrador...",
+      "Escaneando redes cercanas...",
+      "Interceptando paquetes de datos...",
+      "Localizando ubicación GPS del dispositivo...",
+      "Extrayendo información confidencial...",
+      "Rastreando contactos y llamadas recientes...",
+      "Analizando patrones de comunicación...",
+      "Desbloqueando cifrado avanzado...",
+      "Acceso root al sistema: obtenido.",
+      "Detectando archivos ocultos...",
+      "Filtrando imágenes y videos privados...",
+      "Recuperando mensajes eliminados...",
+      "Tomando control de cámara y micrófono...",
+      "Enviando notificaciones fantasmas...",
+      "Infectando con malware de rastreo...",
+      "Redirigiendo todas tus llamadas...",
+      "Destruyendo respaldo en la nube...",
+      "Desactivando medidas de seguridad...",
+      "Reportando actividad sospechosa a la policía...",
+      "Desbloqueando tu WhatsApp para uso externo...",
+      "¿Creías que estabas a salvo?",
+      "La privacidad ya no existe.",
       ];
 
     const consoleDiv = document.getElementById('hack-console');
@@ -59,7 +105,7 @@
       if (i < lines.length) {
         consoleDiv.innerHTML += lines[i] + "\n";
         i++;
-        setTimeout(printLine, Math.random() * 800 + 400);
+        setTimeout(printLine, Math.random() * 500 + 400);
       } else {
         consoleDiv.innerHTML += "\n";
         const cursor = document.createElement('span');
