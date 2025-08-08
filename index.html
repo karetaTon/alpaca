@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Hackeando WhatsApp...</title>
+  <style>
+    body {
+      background: #101010;
+      color: #00ff00;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 1.2em;
+      padding: 20px;
+    }
+    #hack-console {
+      background: #181818;
+      border-radius: 5px;
+      padding: 20px;
+      min-height: 300px;
+      box-shadow: 0 0 10px #0f0;
+      max-width: 700px;
+      margin: 60px auto;
+      white-space: pre-line;
+      overflow: hidden;
+    }
+    .blinking {
+      animation: blinking 1s infinite;
+    }
+    @keyframes blinking {
+      0% { opacity: 1; }
+      50% { opacity: 0.3; }
+      100% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div id="hack-console"></div>
+  <script>
+    const lines = [
+      "Iniciando hackeo de WhatsApp...",
+      "Estableciendo conexión segura...",
+      "Rastreando IP: 192.168.1.101",
+      "Localizando dispositivo...",
+      "Accediendo a base de datos de WhatsApp...",
+      "Descifrando mensajes...",
+      "Obteniendo contraseñas...",
+      "Analizando conversaciones recientes...",
+      "Descargando archivos multimedia...",
+      "¡Acceso concedido!",
+      "Enviando mensajes automatizados...",
+      "Eliminando historial de conversación...",
+      "Borrando pruebas...",
+      "Proceso completado.",
+      ];
+
+    const consoleDiv = document.getElementById('hack-console');
+    let i = 0;
+
+    function printLine() {
+      if (i < lines.length) {
+        consoleDiv.innerHTML += lines[i] + "\n";
+        i++;
+        setTimeout(printLine, Math.random() * 800 + 400);
+      } else {
+        consoleDiv.innerHTML += "\n";
+        const cursor = document.createElement('span');
+        cursor.className = 'blinking';
+        cursor.textContent = '_';
+        consoleDiv.appendChild(cursor);
+      }
+    }
+
+    printLine();
+  </script>
+</body>
+</html>
