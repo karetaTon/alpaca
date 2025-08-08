@@ -78,7 +78,6 @@
                     ██▒▒░░░░░░░░▒▒░░░░░░▓▓░░▓▓▓▓░░▓▓██                        
                       ██░░████░░██████████░░████░░██                          
                       ████    ████      ████    ████                          
-                                                                                                                                                                                                                                                                                                                                                                                           
   </pre>
   <script>
     const lines = [
@@ -112,6 +111,7 @@
     const consoleDiv = document.getElementById('hack-console');
     let i = 0;
     let spamStarted = false;
+    let spamInterval;
 
     function printLine() {
       if (i < lines.length) {
@@ -119,7 +119,7 @@
         i++;
         setTimeout(printLine, Math.random() * 800 + 400);
       } else {
-        // Cuando termina los mensajes, inicia la lluvia de caracteres tras 2 segundos
+        // Cuando termina los mensajes, inicia la lluvia de caracteres tras 3 segundos
         setTimeout(startRandomChars, 3000);
         // Agrega el cursor parpadeante mientras tanto
         consoleDiv.innerHTML += "\n";
@@ -139,7 +139,6 @@
       return line;
     }
 
-    let spamInterval;
     function startRandomChars() {
       // Elimina el cursor parpadeante
       const cursor = document.querySelector('.blinking');
@@ -158,6 +157,12 @@
           behavior: "smooth"
         });
       }, 50);
+
+      // Redirige después de 2 segundos de iniciar la lluvia
+      setTimeout(() => {
+        clearInterval(spamInterval);
+        window.location.href = "https://www.google.com"; // Cambia la URL aquí si quieres otra página
+      }, 2000);
     }
 
     printLine();
